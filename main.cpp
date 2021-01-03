@@ -1,14 +1,16 @@
 #include "types.hpp"
 #include "parser.hpp"
-//#include "debug_printer.hpp"
-#include "debug_tree_visualize.hpp"
+
+//#include "debug_tree_visualize.hpp"
+#include "evaluator.hpp"
 
 int main(void)
 {
 
     for (auto& input : std::list<std::string>{
         // From the OP:
-        "(a and b) xor ((c and d) or (a and b));",
+        "not((a and b) or (c or d));"
+       /* "(a and b) xor ((c and d) or (a and b));",
         "a and b xor (c and d or a and b);",
 
         /// Simpler tests:
@@ -18,7 +20,7 @@ int main(void)
         "not a;",
         "not a and b;",
         "not (a and b);",
-        "a or b or c;",
+        "a or b or c;",*/
         })
     {
         auto f(std::begin(input)), l(std::end(input));

@@ -8,7 +8,6 @@
 namespace qi = boost::spirit::qi;
 namespace phx = boost::phoenix;
 
-#include <boost/variant/recursive_wrapper.hpp>
 #include <ostream>
 #include <string>
 
