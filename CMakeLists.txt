@@ -9,7 +9,7 @@ target_sources(
     ${TARGET_NAME}
     PRIVATE
     main.cpp
- "types.hpp" "parser.hpp" "debug_priniter.hpp" "debug_tree_visualize.hpp")
+ "types.hpp" "parser.hpp" "debug_printer.hpp" "debug_tree_visualize.hpp")
 target_compile_features(
     ${TARGET_NAME}
     PRIVATE

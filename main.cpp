@@ -1,6 +1,6 @@
 #include "types.hpp"
 #include "parser.hpp"
-//#include "debug_priniter.hpp"
+//#include "debug_printer.hpp"
 #include "debug_tree_visualize.hpp"
 
 int main(void)
