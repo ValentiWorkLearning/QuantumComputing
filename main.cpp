@@ -9,7 +9,8 @@ int main(void)
 
     for (auto& input : std::list<std::string>{
         // From the OP:
-        "not((a and b) or (c or d));"
+        "not((a and b) or (c or d));",
+        "((a and b) and (c and d));",
        /* "(a and b) xor ((c and d) or (a and b));",
         "a and b xor (c and d or a and b);",
 

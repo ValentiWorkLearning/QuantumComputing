@@ -6,6 +6,7 @@
 #include <boost/variant/recursive_wrapper.hpp>
 #include <boost/dynamic_bitset.hpp>
 
+#include <functional>
 #include <ostream>
 #include <string>
 #include <optional>
@@ -30,7 +31,7 @@ struct Evaluator : boost::static_visitor<TBitsetType>
         bitset[1] = 0;
         bitset[2] = 0;
         bitset[3] = 0;
-        return Evaluate(bitset, b.oper1, b.oper2);
+        return Evaluate(bitset,b.eval, b.oper1, b.oper2);
     }
     TBitsetType operator()(const binop<OrGate>& b) const
     {
@@ -39,7 +40,7 @@ struct Evaluator : boost::static_visitor<TBitsetType>
         bitset[1] = 1;
         bitset[2] = 1;
         bitset[3] = 0;
-        return Evaluate(bitset, b.oper1, b.oper2);
+        return Evaluate(bitset,b.eval, b.oper1, b.oper2);
     }
     TBitsetType operator()(const binop<XorGate>& b) const
     {
@@ -49,7 +50,7 @@ struct Evaluator : boost::static_visitor<TBitsetType>
         bitset[2] = 1;
         bitset[3] = 0;
 
-        return Evaluate(bitset, b.oper1, b.oper2);
+        return Evaluate(bitset,b.eval, b.oper1, b.oper2);
     }
 
     //void print(const std::string& op, const Expression& l, const Expression& r) const
@@ -59,7 +60,7 @@ struct Evaluator : boost::static_visitor<TBitsetType>
     //    boost::apply_visitor(Evaluator(outstream, m_intent + indentstep), r);
     //}
 
-    TBitsetType Evaluate(const TBitsetType& _qCoverage,  const Expression& l, const Expression& r) const
+    TBitsetType Evaluate(const TBitsetType& _qCoverage,TEvaluator eval, const Expression& l, const Expression& r) const
     {
         TBitsetType lQCoverage = boost::apply_visitor(*this, l);
         TBitsetType rQCoverage = boost::apply_visitor(*this, r);
@@ -80,7 +81,8 @@ struct Evaluator : boost::static_visitor<TBitsetType>
             {
                 for (size_t j{}; j< rSize; ++j)
                 {
-                    resultValue.push_back(lQCoverage[i] || rQCoverage[j] );
+                    bool result = eval(lQCoverage[i], rQCoverage[j]);
+                    resultValue.push_back(result);
                 }
             }
 
@@ -97,7 +99,7 @@ struct Evaluator : boost::static_visitor<TBitsetType>
         auto qCoverage = ~boost::apply_visitor(*this, u.oper1);
         std::string coverage;
         boost::to_string(qCoverage, coverage);
-        outstream << coverage;
+        outstream <<std::endl << coverage;
         return qCoverage;
     }
 };
