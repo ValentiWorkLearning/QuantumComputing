@@ -93,10 +93,15 @@ int main(int argc, char** argv)
 #ifdef USE_ARGV_FILE_PATH
     if(argc != 2 )
     {
-        std::cout << " Wrong launch arguments count. Second argument must be file for evalute." << std::endl;
+        std::cout << "ERROR: Wrong launch arguments count. Second argument must be file for evalute." << std::endl;
         return - 1;
     }
     inputfilePath = argv[1];
+    if(inputfilePath.empty())
+    {
+        std::cout << "ERROR: Empty file path." << std::endl;
+        return -1;
+    }
     std::cout << "Completed file path reading. Evaluating ..." << std::endl;
 #else
     //std::cin >> inputfilePath;

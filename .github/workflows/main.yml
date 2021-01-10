@@ -56,4 +56,4 @@ jobs:
       - name: Launch simple logic example 1
         run: |
           cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
-          .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}/sequential_logic_evaluator/simple_gates_1.txt
+          .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\simple_gates_1.txt
