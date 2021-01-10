@@ -57,3 +57,18 @@ jobs:
         run: |
           cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_1.txt
+
+      - name: Launch simple logic example 2
+        run: |
+          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_2.txt
+
+      - name: Launch simple logic example 3
+        run: |
+          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_3.txt
+
+      - name: Launch logic evaluate with broken gate simulation
+        run: |
+          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\gates_with_broken_gate.txt
