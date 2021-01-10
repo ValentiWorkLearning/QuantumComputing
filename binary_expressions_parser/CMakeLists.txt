@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
-find_package(Boost 1.71)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+# conan_basic_setup(TARGETS)
 
 set (TARGET_NAME FirstTaskQuantumCoverage)
 add_executable(${TARGET_NAME} ${PROJECT_SOURCES})
@@ -20,5 +21,5 @@ target_compile_definitions(
     PRIVATE
     NOMINMAX
 )
-target_include_directories(${TARGET_NAME} PRIVATE ${Boost_INCLUDE_DIR})
-target_link_libraries(${TARGET_NAME} PRIVATE ${Boost_LIBRARIES})
+# target_include_directories(${TARGET_NAME} PRIVATE ${Boost_INCLUDE_DIR})
+# target_link_libraries(${TARGET_NAME} PRIVATE ${Boost_LIBRARIES})
