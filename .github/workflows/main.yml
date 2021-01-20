@@ -52,11 +52,7 @@ jobs:
           cmakeListsTxtPath: ${{ github.workspace }}/CMakeLists.txt
           cmakeBuildType: Debug
           buildDirectory: '${{ runner.workspace }}/build/qc'
-          buildWithCMake: false
-      - name: Run cmake build for the bin-expresions target
-        run: |
-          cd ${{ runner.workspace }}/build/qc
-          cmake --build .
+          buildWithCMake: true
 
       - name: Launch simple logic example 1
         run: |
@@ -77,3 +73,8 @@ jobs:
         run: |
           cd ${{ runner.workspace }}/build//qc//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\gates_with_broken_gate.txt
+
+        - name: Launch binary expressions parser with evaluator
+        run: |
+          cd ${{ runner.workspace }}/build//qc//binary_expressions_parser//bin
+          .\FirstTaskQuantumCoverage.exe
