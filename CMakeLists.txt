@@ -2,3 +2,4 @@ cmake_minimum_required(VERSION 3.14)
 
 add_subdirectory(binary_expressions_parser)
 add_subdirectory(sequential_logic_evaluator)
+add_subdirectory(third_task_trigger)
