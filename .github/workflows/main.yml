@@ -81,5 +81,5 @@ jobs:
 
       - name: Launch third task trigger
         run: |
-          cd ${{ runner.workspace }}/build//qc//third_task_trigger//bin
+          cd ${{ runner.workspace }}/build//qc//third_task_trigger//Debug
           .\ThirdTaskTrigger.exe ${{ github.workspace }}\third_task_trigger\examples\test.txt
