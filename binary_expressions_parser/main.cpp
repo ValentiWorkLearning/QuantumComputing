@@ -1,8 +1,11 @@
 #include "types.hpp"
 #include "parser.hpp"
 
-//#include "debug_tree_visualize.hpp"
-#include "evaluator.hpp"
+#if defined BUILD_TREE_VISUALIZE
+    #include "debug_tree_visualize.hpp"
+#else if defined BUILD_EVALUATOR
+    #include "evaluator.hpp"
+#endif
 
 int main(void)
 {
@@ -11,6 +14,7 @@ int main(void)
         // From the OP:
         "not((a and b) or (c or d));",
         "((a and b) and (c and d));",
+        "not(not((a and b) or (c or d)));"
        /* "(a and b) xor ((c and d) or (a and b));",
         "a and b xor (c and d or a and b);",
 

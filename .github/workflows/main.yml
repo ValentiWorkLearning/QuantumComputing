@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ master,dev/setup_build_boost]
   pull_request:
     branches: [ master ]
 
@@ -51,7 +51,7 @@ jobs:
       - name: Run cmake build for the bin-expresions target
         run: |
           cd ${{ runner.workspace }}/build
-          cmake --build . --target SecondFourthTaskSequentialLogic
+          cmake --build .
 
       - name: Launch simple logic example 1
         run: |
