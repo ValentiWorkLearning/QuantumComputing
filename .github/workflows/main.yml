@@ -78,3 +78,8 @@ jobs:
         run: |
           cd ${{ runner.workspace }}/build//qc//binary_expressions_parser//bin
           .\FirstTaskQuantumCoverage.exe
+
+      - name: Launch third task trigger
+        run: |
+          cd ${{ runner.workspace }}/build//qc//third_task_trigger//bin
+          .\ThirdTaskTrigger.exe ${{ github.workspace }}\third_task_trigger\examples\test.txt
