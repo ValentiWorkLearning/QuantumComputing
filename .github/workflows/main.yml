@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ master,dev/setup_build_boost]
   pull_request:
     branches: [ master ]
 
@@ -35,7 +35,12 @@ jobs:
         with:
           packages: |
             conan
-          
+
+      - name: Download libraries from Conan
+        run: |
+          mkdir ${{ runner.workspace }}/build/qc/Debug
+          conan install ${{ github.workspace }}/conanfile.txt --install-folder ${{ runner.workspace }}/build/qc/
+
       - name : Get the latest CMake version
         uses: lukka/get-cmake@latest
 
@@ -46,29 +51,30 @@ jobs:
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
           cmakeListsTxtPath: ${{ github.workspace }}/CMakeLists.txt
           cmakeBuildType: Debug
-          buildDirectory: '${{ runner.workspace }}/build'
-          buildWithCMake: false
-      - name: Run cmake build for the bin-expresions target
-        run: |
-          cd ${{ runner.workspace }}/build
-          cmake --build . --target SecondFourthTaskSequentialLogic
+          buildDirectory: '${{ runner.workspace }}/build/qc'
+          buildWithCMake: true
 
       - name: Launch simple logic example 1
         run: |
-          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          cd ${{ runner.workspace }}/build//qc//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_1.txt
 
       - name: Launch simple logic example 2
         run: |
-          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          cd ${{ runner.workspace }}/build//qc//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_2.txt
 
       - name: Launch simple logic example 3
         run: |
-          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          cd ${{ runner.workspace }}/build//qc//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\simple_gates_3.txt
 
       - name: Launch logic evaluate with broken gate simulation
         run: |
-          cd ${{ runner.workspace }}/build//sequential_logic_evaluator//Debug
+          cd ${{ runner.workspace }}/build//qc//sequential_logic_evaluator//Debug
           .\SecondFourthTaskSequentialLogic.exe ${{ github.workspace }}\sequential_logic_evaluator\examples\gates_with_broken_gate.txt
+
+      - name: Launch binary expressions parser with evaluator
+        run: |
+          cd ${{ runner.workspace }}/build//qc//binary_expressions_parser//bin
+          .\FirstTaskQuantumCoverage.exe
